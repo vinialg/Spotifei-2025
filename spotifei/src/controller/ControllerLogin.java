@@ -34,7 +34,7 @@ public class ControllerLogin {
                                               "Login efetuado!", 
                                               "Aviso",
                                               JOptionPane.INFORMATION_MESSAGE);
-                Pessoa pessoa2 = new Pessoa(res.getString("nome"), 
+                Pessoa pessoa2 = new Pessoa(res.getString("email"), 
                                          res.getString("usuario"), 
                                          res.getString("senha"));
                 JOptionPane.showMessageDialog(view, "Usuario Logado!","Aviso", JOptionPane.INFORMATION_MESSAGE);

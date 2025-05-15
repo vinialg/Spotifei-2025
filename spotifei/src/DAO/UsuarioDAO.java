@@ -17,7 +17,7 @@ public class UsuarioDAO {
     }
     
     public ResultSet consultar(Pessoa pessoa) throws SQLException{
-        String sql = "select * from aluno where usuario = ? or nome = ? and senha = ?";
+        String sql = "select * from usuario where usuario = ? or email = ? and senha = ?";
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setString(1, pessoa.getUsuario());
         statement.setString(2, pessoa.getNome());
@@ -28,7 +28,7 @@ public class UsuarioDAO {
     }
     
     public void inserir(Pessoa pessoa) throws SQLException{
-        String sql = "insert into aluno (nome, usuario, senha) values ('"
+        String sql = "insert into usuario (email, usuario, senha) values ('"
                       + pessoa.getNome()    + "', '"
                       + pessoa.getUsuario() + "', '"
                       + pessoa.getSenha()   + "')";
@@ -38,7 +38,7 @@ public class UsuarioDAO {
     }
     
     public void atualizar(Pessoa pessoa) throws SQLException{
-        String sql = "update aluno set senha = ? where usuario = ?";
+        String sql = "update usuario set senha = ? where usuario = ?";
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setString(1, pessoa.getSenha());
         statement.setString(2, pessoa.getUsuario());
@@ -47,7 +47,7 @@ public class UsuarioDAO {
     }
     
     public void remover(Pessoa pessoa) throws SQLException{
-        String sql = "delete from aluno where usuario = ?";
+        String sql = "delete from usuario where usuario = ?";
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setString(1, pessoa.getUsuario());
         statement.execute();

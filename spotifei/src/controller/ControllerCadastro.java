@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import view.Cadastrar;
+import view.Inicio;
 
 public class ControllerCadastro {
     private Cadastrar view;
@@ -22,13 +23,15 @@ public class ControllerCadastro {
         String usuario = view.getTxtUsuario().getText();
         String senha = view.getTxtSenha().getText();
         Usuario user = new Usuario(email, usuario,senha);
-        
+        Inicio inicio = new Inicio();
         Conexao conexao = new Conexao();
         try {
             Connection conn = conexao.getConnection();
             UsuarioDAO dao = new UsuarioDAO(conn);
             dao.inserir(user);
             JOptionPane.showMessageDialog(view, "Usuario Cadastrado!","Aviso", JOptionPane.INFORMATION_MESSAGE);
+            view.setVisible(false);
+            inicio.setVisible(true);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(view, "Usuário não cadastrado!","Erro", JOptionPane.ERROR_MESSAGE);
             

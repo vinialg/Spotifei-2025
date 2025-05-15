@@ -8,6 +8,13 @@ package model;
  *
  * @author leona
  */
-public class Playlist {
+public class Playlist extends Musica{
+    private String playlist;
+    
+    public Playlist(String playlist, String musica, String artista, String album) {
+        super(musica, artista, album);
+        this.playlist = playlist;
+    }
+        
     
 }

@@ -49,8 +49,8 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="188" max="-2" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="228" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="txt_senha_login" min="-2" pref="269" max="-2" attributes="0"/>
                       <Component id="txt_usuario_login" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
@@ -66,14 +66,14 @@
                       <Component id="lblEmail" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="btnConfirmar" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="256" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="216" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   <Component id="imgSpotifei" min="-2" pref="130" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Component id="lblInscreva" min="-2" pref="48" max="-2" attributes="0"/>
@@ -89,7 +89,7 @@
                   <Component id="txt_senha_login" pref="34" max="32767" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnConfirmar" min="-2" pref="36" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

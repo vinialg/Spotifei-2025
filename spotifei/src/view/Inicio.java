@@ -24,6 +24,7 @@ public class Inicio extends javax.swing.JFrame {
         this.setMinimumSize(initialSize);
         this.setMaximumSize(initialSize);
         this.setPreferredSize(initialSize);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/spotifei3-removebg-preview.png")));
     }
 
     /**

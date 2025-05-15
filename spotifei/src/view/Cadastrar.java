@@ -8,8 +8,11 @@ import controller.ControllerCadastro;
 import java.awt.Toolkit;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
@@ -32,6 +35,7 @@ public class Cadastrar extends javax.swing.JFrame {
         c = new ControllerCadastro(this);
         initComponents();
         setResizable(false);
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/spotifei3-removebg-preview.png")));
         /*nEmail.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -367,13 +371,15 @@ public class Cadastrar extends javax.swing.JFrame {
         this.txtUsuario = txtUsuario;
     }
     
-/*
+
     public static void main(String args[]) {
-    java.awt.EventQueue.invokeLater(new Runnable() {
-    public void run() {
+        Rectangle screenBounds = GraphicsEnvironment.getLocalGraphicsEnvironment()
+                .getMaximumWindowBounds();
+
+        System.out.println("Largura: " + screenBounds.width);
+        System.out.println("Altura: " + screenBounds.height);
     }
-    });
-    }*/
+    
     public void setnEmail(JTextField nEmail) {
         this.txtEmail = nEmail;
     }

@@ -8,6 +8,24 @@ package model;
  *
  * @author leona
  */
-public class Musica {
+public class Musica extends Artista{
+
+    private String musica;
+    //private String caminho;
+
+    public Musica(String musica, String artista, String album) {
+        super(artista, album);
+        this.musica = musica;
+    }
+
+    public String getMusica() {
+        return musica;
+    }
+    
+    public String toString() {
+        return "Musica: " + musica + ", Artista: " + getArtista() + ", Álbum: " + getAlbum();
+    }
+
+    
     
 }
