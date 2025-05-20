@@ -7,6 +7,7 @@ import DAO.UsuarioDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import model.Pessoa;
 import model.Usuario;
 import view.Cadastrar;
 import view.Inicio;

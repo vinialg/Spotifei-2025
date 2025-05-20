@@ -8,19 +8,16 @@ package model;
  *
  * @author leona
  */
-public class Artista {
-   private String artista;
+public class Artista extends Pessoa{
    
    private String album;
 
-    public Artista(String artista, String album) {
-        this.artista = artista;
+    public Artista(String nome,String album) {
+        super(nome);
         this.album = album;
     }
 
-    public String getArtista() {
-        return artista;
-    }
+    
 
     public String getAlbum() {
         return album;

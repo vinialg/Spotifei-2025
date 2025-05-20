@@ -25,6 +25,8 @@
             <file>file:/C:/Users/leona/Documents/NetBeansProjects/spotifei/build.xml</file>
             <file>file:/C:/Users/leona/Documents/NetBeansProjects/spotifei/manifest.mf</file>
             <file>file:/C:/Users/leona/Documents/NetBeansProjects/spotifei/src/DAO/MusicaDAO.java</file>
+            <file>file:/C:/Users/leona/Documents/NetBeansProjects/spotifei/src/DAO/PlaylistDAO.java</file>
+            <file>file:/C:/Users/leona/Documents/NetBeansProjects/spotifei/src/model/Busca.java</file>
         </group>
     </open-files>
 </project-private>

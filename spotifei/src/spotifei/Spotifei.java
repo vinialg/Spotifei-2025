@@ -30,7 +30,7 @@ public class Spotifei {
         Inicio feed2 = new Inicio();
         feed2.setVisible(true);
 //        Feed telaCadastro = new Feed();
-//        //Teste telaCadastro = new Teste();
+//        Teste telaCadastro = new Teste();
 //        telaCadastro.setVisible(true);  
 //        
         //JFrame frame = new JFrame("Janela Maximizada");

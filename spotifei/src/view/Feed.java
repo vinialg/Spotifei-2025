@@ -19,12 +19,19 @@ import javax.sound.sampled.*;
 import java.io.*;
 import javax.swing.filechooser.*;
 import controller.ControllerFeed;
+import model.Usuario;
 
 /**
  *
  * @author leona
  */
 public class Feed extends javax.swing.JFrame{
+    private Usuario usuario;
+    private String getCoisa;
+
+    public String getGetCoisa() {
+        return getCoisa;
+    }
     
 //    private JTextField filePathField;
 //    private JButton playButton;
@@ -38,12 +45,13 @@ public class Feed extends javax.swing.JFrame{
     /**
      * Creates new form Feed
      */
+    ControllerFeed c = new ControllerFeed(this);
     public Feed() {
         initComponents();
-        
+//        c.clickarMusica();
         SwingUtilities.invokeLater(() -> {
-            ControllerFeed c = new ControllerFeed(this);
-            c.carregarMusica();
+//            c.clickarMusica();
+            //c.carregarMusica();
         });
         
         setResizable(true);
@@ -63,13 +71,25 @@ public class Feed extends javax.swing.JFrame{
    
         
     }
-    
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+        
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
 
-        public JPanel getPainelPrincipal() {
+        // Exemplo: mostrar o nome de usuário no console ou em um label
+        System.out.println("Usuário logado: " + usuario.getUsuario());
 
-            return painelPrincipal;
-        }
+        // ou exibir em uma label, se quiser:
+        // lblUsuario.setText("Bem-vindo, " + usuario.getUsuario());
+    }
+
+    public JPanel getPainelPrincipal() {
+
+        return painelPrincipal;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,12 +104,17 @@ public class Feed extends javax.swing.JFrame{
         jPanel1 = new javax.swing.JPanel();
         painelPrincipal = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jTextField3 = new javax.swing.JTextField();
+        painel_inicial = new javax.swing.JPanel();
+        dez_ultimas = new javax.swing.JButton();
+        musicas_curtidas = new javax.swing.JButton();
+        musicas_descurtidas = new javax.swing.JButton();
+        nova_playlist = new javax.swing.JButton();
+        buscaTexto = new javax.swing.JTextField();
         jToggleButton1 = new javax.swing.JToggleButton();
+        botao_busca = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -108,48 +133,81 @@ public class Feed extends javax.swing.JFrame{
         );
         painelPrincipalLayout.setVerticalGroup(
             painelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGap(0, 710, Short.MAX_VALUE)
         );
 
         jPanel1.add(painelPrincipal);
-        painelPrincipal.setBounds(0, 60, 410, 720);
+        painelPrincipal.setBounds(0, 60, 410, 710);
 
         jLabel2.setText("jLabel2");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(1340, 10, 120, 20);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(679, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(197, 197, 197))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(628, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jPanel3);
-        jPanel3.setBounds(420, 60, 1110, 720);
-
-        jTextField3.setText("jTextField3");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        dez_ultimas.setText("Veja as 10 últimas músicas buscadas");
+        dez_ultimas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                dez_ultimasActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3);
-        jTextField3.setBounds(610, 10, 410, 40);
+
+        musicas_curtidas.setText("Visualizar Lista de músicas curtidas");
+        musicas_curtidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                musicas_curtidasActionPerformed(evt);
+            }
+        });
+
+        musicas_descurtidas.setText("Visualizar Lista de músicas descurtidas");
+        musicas_descurtidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                musicas_descurtidasActionPerformed(evt);
+            }
+        });
+
+        nova_playlist.setText("Carregar Playlists / Nova Playlist +");
+        nova_playlist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nova_playlistActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painel_inicialLayout = new javax.swing.GroupLayout(painel_inicial);
+        painel_inicial.setLayout(painel_inicialLayout);
+        painel_inicialLayout.setHorizontalGroup(
+            painel_inicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painel_inicialLayout.createSequentialGroup()
+                .addContainerGap(351, Short.MAX_VALUE)
+                .addGroup(painel_inicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(nova_playlist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(musicas_descurtidas, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
+                    .addComponent(musicas_curtidas, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
+                    .addComponent(dez_ultimas, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
+                .addGap(216, 216, 216))
+        );
+        painel_inicialLayout.setVerticalGroup(
+            painel_inicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painel_inicialLayout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(nova_playlist, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(dez_ultimas, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(musicas_curtidas, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(musicas_descurtidas, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(394, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(painel_inicial);
+        painel_inicial.setBounds(420, 60, 1110, 710);
+
+        buscaTexto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscaTextoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buscaTexto);
+        buscaTexto.setBounds(610, 10, 410, 40);
 
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/home.png"))); // NOI18N
         jToggleButton1.setText("jToggleButton1");
@@ -160,12 +218,31 @@ public class Feed extends javax.swing.JFrame{
             }
         });
         jPanel1.add(jToggleButton1);
-        jToggleButton1.setBounds(510, 0, 63, 70);
+        jToggleButton1.setBounds(510, 0, 63, 60);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
-        jButton1.setText("jButton1");
+        botao_busca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
+        botao_busca.setText("jButton1");
+        botao_busca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botao_buscaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(botao_busca);
+        botao_busca.setBounds(1020, 10, 40, 40);
+
+        jButton1.setBackground(new java.awt.Color(255, 0, 0));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setText("DELETAR PLAYLIST");
         jPanel1.add(jButton1);
-        jButton1.setBounds(1020, 10, 40, 40);
+        jButton1.setBounds(0, 780, 410, 50);
+
+        jButton2.setText("Like");
+        jPanel1.add(jButton2);
+        jButton2.setBounds(760, 780, 90, 50);
+
+        jButton3.setText("Dislike");
+        jPanel1.add(jButton3);
+        jButton3.setBounds(870, 780, 110, 50);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1550, 850);
@@ -173,13 +250,53 @@ public class Feed extends javax.swing.JFrame{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    public JTextField getBuscaTexto() {
+        return buscaTexto;
+    }
+
+    private void buscaTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaTextoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_buscaTextoActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void dez_ultimasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dez_ultimasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dez_ultimasActionPerformed
+
+    private void musicas_curtidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_musicas_curtidasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_musicas_curtidasActionPerformed
+
+    private void musicas_descurtidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_musicas_descurtidasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_musicas_descurtidasActionPerformed
+
+    private void nova_playlistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nova_playlistActionPerformed
+        c.novaPlaylist();
+    }//GEN-LAST:event_nova_playlistActionPerformed
+
+    private void botao_buscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botao_buscaActionPerformed
+        c.buscarMusica();
+    }//GEN-LAST:event_botao_buscaActionPerformed
+
+    public JPanel getPainel_inicial() {
+        return painel_inicial;
+    }
+
+    public JButton getDez_ultimas() {
+        return dez_ultimas;
+    }
+
+    public JButton getMusicas_curtidas() {
+        return musicas_curtidas;
+    }
+
+    public JButton getMusicas_descurtidas() {
+        return musicas_descurtidas;
+    }
 
     /**
      * @param args the command line arguments
@@ -217,15 +334,24 @@ public class Feed extends javax.swing.JFrame{
 //        });
 //    }
 
+    public JButton getNova_playlist() {
+        return nova_playlist;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botao_busca;
+    private javax.swing.JTextField buscaTexto;
+    private javax.swing.JButton dez_ultimas;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JButton musicas_curtidas;
+    private javax.swing.JButton musicas_descurtidas;
+    private javax.swing.JButton nova_playlist;
     private javax.swing.JPanel painelPrincipal;
+    private javax.swing.JPanel painel_inicial;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,14 +9,29 @@ package model;
  * @author leona
  */
 public class Usuario extends Pessoa{
-    
-    public Usuario(String nome, String usuario, String senha) {
-        super(nome, usuario, senha);
-    }  
+    String usuario, senha, id_usuario;
 
+    public Usuario( String nome,String usuario, String senha) {
+        super(nome);
+        this.usuario = usuario;
+        this.senha = senha;
+    }
+    
+
+    
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+    
+    
     @Override
     public String toString() {
-        return "Usuario{" + '}';
+        return usuario;
     } 
        
     
