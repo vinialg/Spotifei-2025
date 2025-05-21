@@ -34,7 +34,7 @@ public class ControllerLogin {
 
     
     public void loginUsuario(){
-        Feed feed = new Feed();
+//        Feed feed = new Feed();
         Usuario usuario01 = new Usuario(view.getTxt_usuario_login().getText(), 
                                 view.getTxt_usuario_login().getText(),
                                 view.getTxt_senha_login().getText());
@@ -57,9 +57,8 @@ public class ControllerLogin {
 //                                         res.getString("senha"));
 //                JOptionPane.showMessageDialog(view, "Usuario Logado!","Aviso", JOptionPane.INFORMATION_MESSAGE);
 //                Feed feed = new Feed(pessoa2);
-//                Login endlogin = new Login();
-//                endlogin.setVisible(false);
-                feed.setUsuario(usuarioLogado);
+                Feed feed = new Feed();
+                feed.setUsuario(this.usuarioLogado);
                 feed.setVisible(true);
                 
                 /*AltExcFrame aec = new AltExcFrame(aluno2);
@@ -69,6 +68,7 @@ public class ControllerLogin {
 //                                              "Login NÃO efetuado!", 
 //                                              "Aviso",
 //                                              JOptionPane.ERROR_MESSAGE);
+                Feed feed = new Feed();
                 feed.setVisible(false);
             }
         } catch(SQLException e){    
@@ -76,6 +76,7 @@ public class ControllerLogin {
                                               "Erro de conexão!", 
                                               "Aviso",
                                               JOptionPane.ERROR_MESSAGE);
+            Feed feed = new Feed();
             feed.setVisible(false);
         }
     }

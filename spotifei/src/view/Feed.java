@@ -176,7 +176,7 @@ public class Feed extends javax.swing.JFrame{
         painel_inicialLayout.setHorizontalGroup(
             painel_inicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painel_inicialLayout.createSequentialGroup()
-                .addContainerGap(351, Short.MAX_VALUE)
+                .addContainerGap(354, Short.MAX_VALUE)
                 .addGroup(painel_inicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(nova_playlist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(musicas_descurtidas, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
@@ -218,34 +218,45 @@ public class Feed extends javax.swing.JFrame{
             }
         });
         jPanel1.add(jToggleButton1);
-        jToggleButton1.setBounds(510, 0, 63, 60);
+        jToggleButton1.setBounds(503, 0, 70, 60);
 
         botao_busca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
-        botao_busca.setText("jButton1");
+        botao_busca.setBorder(null);
         botao_busca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botao_buscaActionPerformed(evt);
             }
         });
         jPanel1.add(botao_busca);
-        botao_busca.setBounds(1020, 10, 40, 40);
+        botao_busca.setBounds(1030, 10, 30, 30);
 
         jButton1.setBackground(new java.awt.Color(255, 0, 0));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setText("DELETAR PLAYLIST");
+        jButton1.setText("DELETAR");
+        jButton1.setBorder(null);
         jPanel1.add(jButton1);
         jButton1.setBounds(0, 780, 410, 50);
 
         jButton2.setText("Like");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2);
         jButton2.setBounds(760, 780, 90, 50);
 
         jButton3.setText("Dislike");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3);
         jButton3.setBounds(870, 780, 110, 50);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 1550, 850);
+        jPanel1.setBounds(10, 0, 1550, 850);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -267,11 +278,11 @@ public class Feed extends javax.swing.JFrame{
     }//GEN-LAST:event_dez_ultimasActionPerformed
 
     private void musicas_curtidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_musicas_curtidasActionPerformed
-        // TODO add your handling code here:
+        c.exibirMusicasCurtidas();
     }//GEN-LAST:event_musicas_curtidasActionPerformed
 
     private void musicas_descurtidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_musicas_descurtidasActionPerformed
-        // TODO add your handling code here:
+        c.exibirMusicasDescurtidas();
     }//GEN-LAST:event_musicas_descurtidasActionPerformed
 
     private void nova_playlistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nova_playlistActionPerformed
@@ -281,6 +292,14 @@ public class Feed extends javax.swing.JFrame{
     private void botao_buscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botao_buscaActionPerformed
         c.buscarMusica();
     }//GEN-LAST:event_botao_buscaActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        c.curtir();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        c.descurtir();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     public JPanel getPainel_inicial() {
         return painel_inicial;

@@ -9,6 +9,7 @@ package model;
  * @author leona
  */
 public class Musica extends Artista{
+    private int id_musica;
     private Pessoa nome;
     private String musica;
     private String genero;
@@ -19,13 +20,17 @@ public class Musica extends Artista{
 //        this.nome = new Pessoa(nome);
 //        this.musica = musica;
 
-    public Musica(String musica, String nome, String album, String genero) {
+    public Musica(int id_musica, String musica, String nome, String album, String genero) {
         super(nome, album);
         this.nome = new Pessoa(nome);
         this.musica = musica;
         this.genero = genero;
     }
 
+    public int getId_musica() {
+        return id_musica;
+    }
+    
 //    }
     public String getMusica() {
         return musica;

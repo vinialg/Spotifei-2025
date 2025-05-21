@@ -48,18 +48,39 @@ public class PlaylistDAO {
         conn.close();              // Feche a conexão, se for apropriado aqui
     }
     
-    public void inserirMusicaPlaylist(Playlist playlist) throws SQLException{
-        String sql = "insert into musica_playlist (email, usuario, senha) values ('"
-                      + playlist.getNome_playlist()    + "')";
+    public void inserirMusicaPlaylist(int playlist, int musica) throws SQLException {
+        String sql = "insert into musica_playlist (id_playlist, id_musica) values (?, ?)";
         PreparedStatement statement = conn.prepareStatement(sql);
-        statement.execute();
-        conn.close();
+        statement.setInt(1, playlist);
+        statement.setInt(2, musica);
+        statement.executeUpdate(); // Use executeUpdate para INSERT
+        statement.close();         // Feche o statement
+        conn.close();              // Feche a conexão, se for apropriado aqui
     }
+    
+//    public void inserirMusicaPlaylist(int playlist, int musica) throws SQLException{
+//        String sql = "insert into musica_playlist (id_playlist, id_musica) values ('"
+//                      + playlist    + musica + "')";
+//        PreparedStatement statement = conn.prepareStatement(sql);
+//        statement.execute();
+//        conn.close();
+//    }
     
     public ResultSet consultarPlaylist(int id_usuario) throws SQLException {
         String sql = "select nome_playlist from playlist where id_usuario = ?";
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setInt(1, id_usuario);
+        // Aqui você executa a consulta corretamente
+        ResultSet resultado = statement.executeQuery();
+        
+        return resultado;
+    }
+    
+    public ResultSet consultarPlaylist2(int id_usuario, String nome_playlist) throws SQLException {
+        String sql = "select id_playlist from playlist where id_usuario = ? and nome_playlist = ?";
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setInt(1, id_usuario);
+        statement.setString(2, nome_playlist);
         // Aqui você executa a consulta corretamente
         ResultSet resultado = statement.executeQuery();
         
