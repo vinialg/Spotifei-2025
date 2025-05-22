@@ -24,7 +24,7 @@ public class MusicaDAO {
     }
     
     public ResultSet consultarMusica() throws SQLException {
-        String sql = "select id, musica, artista, album, genero from musica";
+        String sql = "select * from musica";
         PreparedStatement statement = conn.prepareStatement(sql);
 
         // Aqui você executa a consulta corretamente
@@ -149,5 +149,168 @@ public class MusicaDAO {
         
         return resultado;
     }
+    
+//    public void registrarBuscaMusica(int id_usuario, int id_musica) throws SQLException {
+//        String sql = "INSERT INTO historico_buscas (id_usuario, id_musica) VALUES (?, ?)";
+//
+//        PreparedStatement stmt = conn.prepareStatement(sql);
+//        stmt.setInt(1, id_usuario);
+//        stmt.setInt(2, id_musica);
+//
+//        stmt.executeUpdate();
+//        stmt.close();
+//    }
+    public void registrarBuscaMusica(int id_usuario, int id_musica) throws SQLException {
+        // Skip registration if user ID is invalid
+        if (id_usuario <= 0) {
+            System.out.println("Não foi possível registrar busca: usuário não autenticado.");
+            return; // Skip recording search for invalid/guest users
+        }
+
+        String sql = "INSERT INTO historico_buscas (id_usuario, id_musica) VALUES (?, ?)";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, id_usuario);
+        stmt.setInt(2, id_musica);
+        stmt.executeUpdate();
+        stmt.close();
+    }
+    
+//    public void registrarBuscaMusica(Integer id_usuario, int id_musica) throws SQLException {
+//        String sql = "INSERT INTO historico_buscas (id_usuario, id_musica) VALUES (?, ?)";
+//        PreparedStatement stmt = conn.prepareStatement(sql);
+//
+//        if (id_usuario != null && id_usuario > 0) {
+//            stmt.setInt(1, id_usuario);
+//        } else {
+//            stmt.setNull(1, java.sql.Types.INTEGER);
+//        }
+//
+//        stmt.setInt(2, id_musica);
+//        stmt.executeUpdate();
+//        stmt.close();
+//    }
+
+    /**
+     * Consulta as últimas músicas buscadas pelo usuário
+     * @param id_usuario ID do usuário
+     * @param limite Número máximo de músicas a retornar (ex: 10)
+     * @return ResultSet com as músicas buscadas recentemente
+     * @throws SQLException 
+     */
+    public ResultSet consultarUltimasMusicasBuscadas(int id_usuario, int limite) throws SQLException {
+        // Use a subquery to first select the most recent searches for each unique music ID
+        String sql = "SELECT m.* FROM musica m " +
+                     "INNER JOIN (SELECT DISTINCT ON (id_musica) id_musica, data_busca " +
+                     "            FROM historico_buscas " + 
+                     "            WHERE id_usuario = ? " +
+                     "            ORDER BY id_musica, data_busca DESC) h " +
+                     "ON m.id = h.id_musica " +
+                     "ORDER BY h.data_busca DESC " +
+                     "LIMIT ?";
+
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, id_usuario);
+        stmt.setInt(2, limite);
+        return stmt.executeQuery();
+    }
+    
+        public boolean deletarPlaylist(int id_playlist, int id_usuario) throws SQLException {
+            // Primeiro remove todas as músicas da playlist
+            String sqlRemoveMusicas = "DELETE FROM musica_playlist WHERE id_playlist = ?";
+            PreparedStatement stmtRemoveMusicas = conn.prepareStatement(sqlRemoveMusicas);
+            stmtRemoveMusicas.setInt(1, id_playlist);
+            stmtRemoveMusicas.executeUpdate();
+            stmtRemoveMusicas.close();
+
+            // Depois remove a playlist
+            String sqlRemovePlaylist = "DELETE FROM playlist WHERE id_playlist = ? AND id_usuario = ?";
+            PreparedStatement stmtRemovePlaylist = conn.prepareStatement(sqlRemovePlaylist);
+            stmtRemovePlaylist.setInt(1, id_playlist);
+            stmtRemovePlaylist.setInt(2, id_usuario);
+
+            int linhasAfetadas = stmtRemovePlaylist.executeUpdate();
+            stmtRemovePlaylist.close();
+
+            return linhasAfetadas > 0;
+    }
+
+    /**
+     * Remove uma música específica de uma playlist
+     * @param id_playlist ID da playlist
+     * @param id_musica ID da música a ser removida
+     * @return true se a música foi removida com sucesso, false caso contrário
+     * @throws SQLException 
+     */
+    public boolean removerMusicaDaPlaylist(int id_playlist, int id_musica) throws SQLException {
+        String sql = "DELETE FROM musica_playlist WHERE id_playlist = ? AND id_musica = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, id_playlist);
+        stmt.setInt(2, id_musica);
+
+        int linhasAfetadas = stmt.executeUpdate();
+        stmt.close();
+
+        return linhasAfetadas > 0;
+    }
+
+    /**
+     * Verifica se uma música está em uma playlist específica
+     * @param id_playlist ID da playlist
+     * @param id_musica ID da música
+     * @return true se a música está na playlist, false caso contrário
+     * @throws SQLException 
+     */
+    public boolean verificarMusicaNaPlaylist(int id_playlist, int id_musica) throws SQLException {
+        String sql = "SELECT 1 FROM musica_playlist WHERE id_playlist = ? AND id_musica = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, id_playlist);
+        stmt.setInt(2, id_musica);
+
+        ResultSet rs = stmt.executeQuery();
+        boolean existe = rs.next();
+
+        rs.close();
+        stmt.close();
+
+        return existe;
+    }
+
+    /**
+     * Conta quantas músicas uma playlist possui
+     * @param id_playlist ID da playlist
+     * @return número de músicas na playlist
+     * @throws SQLException 
+     */
+    public int contarMusicasNaPlaylist(int id_playlist) throws SQLException {
+        String sql = "SELECT COUNT(*) as total FROM musica_playlist WHERE id_playlist = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, id_playlist);
+
+        ResultSet rs = stmt.executeQuery();
+        int total = 0;
+        if (rs.next()) {
+            total = rs.getInt("total");
+        }
+
+        rs.close();
+        stmt.close();
+
+        return total;
+    }
+    
+    
+//    public ResultSet consultarUltimasMusicasBuscadas(int id_usuario, int limite) throws SQLException {
+//        String sql = "SELECT DISTINCT m.* FROM musica m " +
+//                     "INNER JOIN historico_buscas h ON m.id = h.id_musica " +
+//                     "WHERE h.id_usuario = ? " +
+//                     "ORDER BY h.data_busca DESC " +
+//                     "LIMIT ?";
+//
+//        PreparedStatement stmt = conn.prepareStatement(sql);
+//        stmt.setInt(1, id_usuario);
+//        stmt.setInt(2, limite);
+//
+//        return stmt.executeQuery();
+//    }
     
 }

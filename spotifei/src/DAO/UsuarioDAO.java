@@ -17,7 +17,7 @@ public class UsuarioDAO {
     }
     
     public ResultSet consultar(Usuario usuario) throws SQLException{
-        String sql = "select * from usuario where usuario = ? or email = ? and senha = ?";
+        String sql = "select * from usuario where (usuario = ? or email = ?) and senha = ?";
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setString(1, usuario.getUsuario());
         statement.setString(2, usuario.getNome());
@@ -62,6 +62,29 @@ public class UsuarioDAO {
         statement.setString(1, usuario.getUsuario());
         statement.execute();
         conn.close();
+    }
+    
+     public Usuario autenticar(String login, String senha) throws SQLException {
+        String sql = "SELECT id, email, usuario, senha FROM usuario WHERE (usuario = ? OR email = ?) AND senha = ?";
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setString(1, login);
+            statement.setString(2, login);
+            statement.setString(3, senha);
+            
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    Usuario usuario = new Usuario(
+                        rs.getString("email"),
+                        rs.getString("usuario"),
+                        rs.getString("senha")
+                    );
+                    usuario.setId_usuario(rs.getString("id"));
+                    usuario.setAutenticado(true);
+                    return usuario;
+                }
+            }
+        }
+        return null; // Usuário não encontrado ou senha incorreta
     }
     
 }

@@ -29,6 +29,10 @@ public class Feed extends javax.swing.JFrame{
     private Usuario usuario;
     private String getCoisa;
 
+    /**
+     *
+     * @return
+     */
     public String getGetCoisa() {
         return getCoisa;
     }
@@ -46,8 +50,24 @@ public class Feed extends javax.swing.JFrame{
      * Creates new form Feed
      */
     ControllerFeed c = new ControllerFeed(this);
+
+    /**
+     *
+     */
     public Feed() {
         initComponents();
+        String path1 = "src/img/like.png"; 
+        ImageIcon ic1= new ImageIcon(path1);
+        Image nw1 = ic1.getImage().getScaledInstance(50, 40, Image.SCALE_AREA_AVERAGING);
+        ImageIcon scaledIcon1 = new ImageIcon(nw1);
+
+        curtir_botao.setIcon(scaledIcon1);
+        String path2 = "src/img/dislike.png"; 
+        ImageIcon ic2 = new ImageIcon(path2);
+        Image nw2 = ic2.getImage().getScaledInstance(50, 40, Image.SCALE_AREA_AVERAGING);
+        ImageIcon scaledIcon2 = new ImageIcon(nw2);
+
+        descurtir_botao.setIcon(scaledIcon2);
 //        c.clickarMusica();
         SwingUtilities.invokeLater(() -> {
 //            c.clickarMusica();
@@ -72,10 +92,18 @@ public class Feed extends javax.swing.JFrame{
         
     }
 
+    /**
+     *
+     * @return
+     */
     public Usuario getUsuario() {
         return usuario;
     }
         
+    /**
+     *
+     * @param usuario
+     */
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
 
@@ -86,6 +114,10 @@ public class Feed extends javax.swing.JFrame{
         // lblUsuario.setText("Bem-vindo, " + usuario.getUsuario());
     }
 
+    /**
+     *
+     * @return
+     */
     public JPanel getPainelPrincipal() {
 
         return painelPrincipal;
@@ -103,7 +135,6 @@ public class Feed extends javax.swing.JFrame{
 
         jPanel1 = new javax.swing.JPanel();
         painelPrincipal = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         painel_inicial = new javax.swing.JPanel();
         dez_ultimas = new javax.swing.JButton();
         musicas_curtidas = new javax.swing.JButton();
@@ -113,8 +144,9 @@ public class Feed extends javax.swing.JFrame{
         jToggleButton1 = new javax.swing.JToggleButton();
         botao_busca = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        curtir_botao = new javax.swing.JButton();
+        descurtir_botao = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -124,6 +156,8 @@ public class Feed extends javax.swing.JFrame{
         jPanel1.setPreferredSize(new java.awt.Dimension(1550, 830));
         jPanel1.setRequestFocusEnabled(false);
         jPanel1.setLayout(null);
+
+        painelPrincipal.setBackground(new java.awt.Color(51, 51, 51));
 
         javax.swing.GroupLayout painelPrincipalLayout = new javax.swing.GroupLayout(painelPrincipal);
         painelPrincipal.setLayout(painelPrincipalLayout);
@@ -139,9 +173,7 @@ public class Feed extends javax.swing.JFrame{
         jPanel1.add(painelPrincipal);
         painelPrincipal.setBounds(0, 60, 410, 710);
 
-        jLabel2.setText("jLabel2");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(1340, 10, 120, 20);
+        painel_inicial.setBackground(new java.awt.Color(51, 51, 51));
 
         dez_ultimas.setText("Veja as 10 últimas músicas buscadas");
         dez_ultimas.addActionListener(new java.awt.event.ActionListener() {
@@ -232,28 +264,47 @@ public class Feed extends javax.swing.JFrame{
 
         jButton1.setBackground(new java.awt.Color(255, 0, 0));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setText("DELETAR");
+        jButton1.setText("DELETAR MÚSICA");
         jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1);
-        jButton1.setBounds(0, 780, 410, 50);
+        jButton1.setBounds(230, 780, 180, 50);
 
-        jButton2.setText("Like");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        curtir_botao.setBackground(new java.awt.Color(0, 102, 0));
+        curtir_botao.setBorder(null);
+        curtir_botao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                curtir_botaoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2);
-        jButton2.setBounds(760, 780, 90, 50);
+        jPanel1.add(curtir_botao);
+        curtir_botao.setBounds(760, 780, 90, 50);
 
-        jButton3.setText("Dislike");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        descurtir_botao.setBackground(new java.awt.Color(204, 0, 0));
+        descurtir_botao.setBorder(null);
+        descurtir_botao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                descurtir_botaoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3);
-        jButton3.setBounds(870, 780, 110, 50);
+        jPanel1.add(descurtir_botao);
+        descurtir_botao.setBounds(870, 780, 100, 50);
+
+        jButton4.setBackground(new java.awt.Color(255, 0, 0));
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton4.setText("DELETAR PLAYLIST");
+        jButton4.setBorder(null);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4);
+        jButton4.setBounds(0, 780, 170, 50);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(10, 0, 1550, 850);
@@ -261,6 +312,10 @@ public class Feed extends javax.swing.JFrame{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     *
+     * @return
+     */
     public JTextField getBuscaTexto() {
         return buscaTexto;
     }
@@ -268,13 +323,32 @@ public class Feed extends javax.swing.JFrame{
     private void buscaTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaTextoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buscaTextoActionPerformed
-
+    
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
+//        c.limpaMusica();
+        for (Component todos : painel_inicial.getComponents()) {
+            todos.setVisible(false);
+        }
+        
+        nova_playlist.setVisible(true);
+        dez_ultimas.setVisible(true);
+        musicas_curtidas.setVisible(true);
+        musicas_descurtidas.setVisible(true);
+        
+        painel_inicial.add(nova_playlist);
+        painel_inicial.add(dez_ultimas);
+        painel_inicial.add(musicas_curtidas);
+        painel_inicial.add(musicas_descurtidas);
+//        painel_inicial.revalidate();
+//        painel_inicial.repaint();
+//        nova_playlist.setVisible(true);
+//        dez_ultimas.setVisible(true);
+//        musicas_curtidas.setVisible(true);
+//        musicas_descurtidas.setVisible(true);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void dez_ultimasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dez_ultimasActionPerformed
-        // TODO add your handling code here:
+        c.exibirDezUltimasMusicasBuscadas();
     }//GEN-LAST:event_dez_ultimasActionPerformed
 
     private void musicas_curtidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_musicas_curtidasActionPerformed
@@ -293,32 +367,58 @@ public class Feed extends javax.swing.JFrame{
         c.buscarMusica();
     }//GEN-LAST:event_botao_buscaActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void curtir_botaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_curtir_botaoActionPerformed
+
         c.curtir();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_curtir_botaoActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void descurtir_botaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descurtir_botaoActionPerformed
+
         c.descurtir();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_descurtir_botaoActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        c.deletarPlaylist();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        c.deletarMusicaDaPlaylist();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    /**
+     *
+     * @return
+     */
     public JPanel getPainel_inicial() {
         return painel_inicial;
     }
 
+    /**
+     *
+     * @return
+     */
     public JButton getDez_ultimas() {
         return dez_ultimas;
     }
 
+    /**
+     *
+     * @return
+     */
     public JButton getMusicas_curtidas() {
         return musicas_curtidas;
     }
 
+    /**
+     *
+     * @return
+     */
     public JButton getMusicas_descurtidas() {
         return musicas_descurtidas;
     }
 
     /**
-     * @param args the command line arguments
+     * @return 
      */
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
@@ -360,11 +460,11 @@ public class Feed extends javax.swing.JFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botao_busca;
     private javax.swing.JTextField buscaTexto;
+    private javax.swing.JButton curtir_botao;
+    private javax.swing.JButton descurtir_botao;
     private javax.swing.JButton dez_ultimas;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JButton musicas_curtidas;
