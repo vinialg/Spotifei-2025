@@ -193,37 +193,6 @@ Sinta-se à vontade para estudar, modificar e evoluir!
 
 ---
 
-## 🎮 ControllerFeed.java – Controlador do Feed
-
-A classe `ControllerFeed` atua como intermediária entre a interface gráfica `Feed` (View) e as classes DAO que acessam os dados de músicas, playlists e usuários. Ela segue o padrão MVC (Model-View-Controller).
-
-### 📌 Responsabilidades principais:
-
-#### 🔄 `ControllerFeed(Feed telaFeed)`
-- Construtor que recebe a tela de `Feed` e inicializa os dados visuais.
-- Chama os métodos para carregar músicas, playlists e usuários.
-
-#### 🎵 `carregarMusicas()`
-- Acessa `MusicaDAO` para recuperar todas as músicas cadastradas.
-- Atualiza a interface `telaFeed` com os nomes das músicas na lista visual.
-
-#### 🎧 `carregarPlaylists()`
-- Usa `PlaylistDAO` para obter todas as playlists do sistema.
-- Insere os nomes das playlists em um componente gráfico da tela de feed.
-
-#### 👥 `carregarUsuarios()`
-- Acessa `UsuarioDAO` para listar os usuários do sistema.
-- Mostra essas informações no componente visual apropriado da interface.
-
-### 🧠 Observações:
-- Segrega a lógica de apresentação, facilitando a manutenção.
-- Segue o padrão MVC ao separar controle de dados e exibição visual.
-- Melhora a escalabilidade e reutilização do código.
-
----
-
----
-
 ## 🎮 ControllerFeed.java – Controlador do Feed (Principal Classe Controladora)
 
 `ControllerFeed.java` é uma classe Java que atua como controlador para a interface de feed de um aplicativo de música. Ela gerencia as interações do usuário com a view `Feed`, como busca de músicas, gerenciamento de playlists, curtidas/descurtidas de músicas e exibição de informações relacionadas. A classe interage com um banco de dados por meio de Objetos de Acesso a Dados (DAOs) para realizar operações CRUD e atualiza a interface do usuário (UI) utilizando componentes Swing.
