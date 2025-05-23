@@ -1,5 +1,5 @@
 
-# 🎵 Projeto Java: Spotifei – Gerenciador de Músicas e Playlists - Link Anexado No Canto Superior Direito Do Projeto No Github
+# 🎵 Projeto Java: Spotifei – Gerenciador de Músicas e Playlists - Link Anexado No Canto Superior Direito Do Projeto Em About
 
 ## 1. Objetivo 🎯
 
